@@ -1,16 +1,10 @@
 #!name = 高德打车签到
-#!desc = 自动获取高德打车 SessionID 并执行每日签到（支持高德APP/微信/支付宝小程序）
+#!desc = 高德打车每日定时自动签到（基于 wf021325 脚本）
 #!author = wf021325
 #!homepage = https://github.com/wf021325/qx
 #!icon = https://raw.githubusercontent.com/Orz-3/mini/master/Color/amap.png
 #!date = 2026-11-14
 
 [Script]
-# 定时自动签到（已调整为每天早上 08:10 执行）
+# 定时自动签到（每天早上 08:10 执行）
 cron "10 8 * * *" script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js, timeout=120, tag=高德地图打车签到, enable=true
-
-# 获取 Cookie / SessionID（注意：必须使用 http-response 且开启 requires-body=true）
-http-response ^https?:\/\/(m5(|-zb)|dache)\.amap\.com\/(ws\/yuece\/(act|openapi\/activity\/current)\/query|common\/(alipaymini|wxmini)\?_ENCRYPT=) script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js, requires-body=true, timeout=60, tag=高德打车获取Cookie, enable=true
-
-[MITM]
-hostname = *.amap.com
