@@ -1,0 +1,16 @@
+#!name = 途虎养车积分签到
+#!desc = 自动获取途虎养车 Token 并执行小程序与 App 双端每日积分签到
+#!author = Zoo
+#!homepage = https://github.com/Crazy-Z7/Task
+#!icon = https://raw.githubusercontent.com/Crazy-Z7/Task/main/Image/IMG_0905.jpeg
+#!date = 2026-11-14
+
+[Script]
+# 定时自动签到（默认每天早上 08:40 执行，双端签到并查询积分）
+cron "40 8 * * *" script-path=https://raw.githubusercontent.com/Crazy-Z7/Task/main/Tuhyche.js, timeout=60, tag=途虎养车积分签到, enable=true
+
+# 获取会话 Token（打开途虎养车微信小程序，进入积分页面触发）
+http-request ^https:\/\/api\.tuhu\.cn\/User\/GetUserCurrentAndNextGradeInfo script-path=https://raw.githubusercontent.com/Crazy-Z7/Task/main/Tuhyche.js, requires-body=false, timeout=60, tag=途虎养车获取Cookie, enable=true
+
+[MITM]
+hostname = api.tuhu.cn
