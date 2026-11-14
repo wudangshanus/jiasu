@@ -1,0 +1,16 @@
+#!name = 龙湖天街签到抽奖
+#!desc = 自动获取龙湖天街小程序 Cookie 并执行每日签到、抽奖与珑珠查询
+#!author = Leiyiyan
+#!homepage = https://github.com/leiyiyan/resource
+#!icon = https://raw.githubusercontent.com/leiyiyan/resource/main/icons/lhtj.png
+#!date = 2026-11-14
+
+[Script]
+# 定时自动签到与抽奖（默认每天早上 08:30 执行）
+cron "30 8 * * *" script-path=https://raw.githubusercontent.com/leiyiyan/resource/main/script/lhtj/lhtj.js, timeout=60, tag=龙湖天街签到抽奖, enable=true
+
+# 获取 Cookie（打开龙湖天街小程序，进入签到页面触发）
+http-request ^https?:\/\/gw2c\-hw\-open\.longfor\.com\/lmarketing\-task\-api\-mvc\-prod\/openapi\/task\/v1\/signature\/clock script-path=https://raw.githubusercontent.com/leiyiyan/resource/main/script/lhtj/lhtj.js, requires-body=false, timeout=60, tag=龙湖天街获取Cookie, enable=true
+
+[MITM]
+hostname = gw2c-hw-open.longfor.com
