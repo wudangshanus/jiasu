@@ -6,8 +6,8 @@
 #!date = 2026-11-14
 
 [Script]
-# 定时自动签到（原脚本默认每天 00:01 执行，超时时间已按注释建议调高）
-cron "1 0 * * *" script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js, timeout=120, tag=高德地图打车签到, enable=true
+# 定时自动签到（已调整为每天早上 08:10 执行）
+cron "10 8 * * *" script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js, timeout=120, tag=高德地图打车签到, enable=true
 
 # 获取 Cookie / SessionID（注意：必须使用 http-response 且开启 requires-body=true）
 http-response ^https?:\/\/(m5(|-zb)|dache)\.amap\.com\/(ws\/yuece\/(act|openapi\/activity\/current)\/query|common\/(alipaymini|wxmini)\?_ENCRYPT=) script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js, requires-body=true, timeout=60, tag=高德打车获取Cookie, enable=true
